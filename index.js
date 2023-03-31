@@ -35,7 +35,62 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies", (req, res) => {
-  res.json(top10movies);
+  res.send("A JSON object holding data about all movies");
+});
+
+app.get("/movies/titles/:title", (req, res) => {
+  res.send("A JSON object holding data about a single movie");
+});
+
+app.get("/movies/genres/:genre", (req, res) => {
+  res.send("A JSON object holding data about a genre");
+});
+
+app.get("/movies/directors/:director", (req, res) => {
+  res.send("A JSON object holding data about a director");
+});
+
+app.post("/users", (req, res) => {
+  let newUser = req.body;
+
+  if (!newUser.name) {
+    const messaage = 'Missing "name" in request body';
+    res.status(400).send(messaage);
+  } else {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).send(newUser);
+  }
+});
+
+app.post("/users/usernames/:userName/:newUserName", (req, res) => {
+  res.send(
+    "A text message indicating the name of the user and the successful updating of the username."
+  );
+});
+
+app.put("/users/passwords/:newPassword", (req, res) => {
+  res.send(
+    "A text message indicating the username and the successful updating of the password."
+  );
+});
+
+app.post("/users/favorites/:userName/:movieTitle", (req, res) => {
+  res.send(
+    "A text message indicating [title of movie] has been added to 'Favorites.'"
+  );
+});
+
+app.delete("/users/favorites/:userName/:movieTitle", (req, res) => {
+  res.send(
+    "A text message indicating [title of movie] has been deleted from 'Favorites.'"
+  );
+});
+
+app.delete("/users/:userName", (req, res) => {
+  res.send(
+    "A text message that says [Username] was successfully deregistered."
+  );
 });
 
 app.use((err, req, res, next) => {

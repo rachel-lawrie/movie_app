@@ -6,5 +6,136 @@
   </head>
   <body>
     <h1>Documentation Page</h1>
+    <table border="1">
+      <tr>
+        <td>Business logic</td>
+        <td>URL</td>
+        <td>HTTP Method</td>
+        <td>Request body data format</td>
+        <td>Response body data format</td>
+      </tr>
+      <tr>
+        <td>Get a list of all movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about all movies</td>
+      </tr>
+      <tr>
+        <td>Get data about a single movie by title</td>
+        <td>/movies/titles/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a single movie, containing movie
+          description, genre, director, image URL, and whether it is featured or
+          not. Example: { Title: “Gladiator”, Movie_description: “A former Roman
+          General sets out to exact vengeance against the corrupt emperor who
+          murdered his family and sent him into slavery.”, Genre: [“Action”,
+          “Drama”], Director: “Ridley Scott”, Image:
+          “http://localhost:3000/movies/images/gladiator”, Featured: yes }
+        </td>
+      </tr>
+      <tr>
+        <td>Get list of movies in a genre</td>
+        <td>/movies/genres/[genre]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a genre, containing the genre
+          description, and a list of all movies on platform in that genre.
+          Example: { Genre_name: “Thriller”, Thriller_description: “A thriller
+          movie is a genre of film that is designed to keep the audience on the
+          edge of their seats through suspenseful and tense situations. Thriller
+          movies often involve a plot that is centered around a crime, mystery,
+          or danger, with the main character or characters facing intense
+          physical or psychological challenges.”, Thriller_movies: “Butterfly
+          Effect”, “Get out”, “The Prestige”... }
+        </td>
+      </tr>
+      <tr>
+        <td>Get data about a director</td>
+        <td>/movies/directors/[director]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a director, containing the bio, date
+          of birth, and death year. Example: { Director_name: “Ridley Scott”,
+          Bio: “Ridley Scott is a highly acclaimed English film director and
+          producer. Scott began his career directing commercials and made his
+          feature film debut with "The Duellists" in 1977. He then directed the
+          science fiction classic "Alien" in 1979, which catapulted him to
+          international success. Scott is known for his visually stunning and
+          atmospheric films, as well as his ability to create compelling
+          characters and tell gripping stories. He continues to be one of the
+          most respected and influential filmmakers in the industry.”, DOB:
+          “November 30, 1937”, Death: “-” }
+        </td>
+      </tr>
+      <tr>
+        <td>Add a user</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>
+          A JSON object holding data about the user to add, structured like: {
+          name: “Rachel Lawrie”, username:”r.lawrie”, password:
+          “13cat333plate&%” }
+        </td>
+        <td>
+          A JSON object holding data about the user that was added. Example: {
+          id: 2380-293-2333, name: “Rachel Lawrie”, username:”r.lawrie”,
+          password: “13cat333plate&%” }
+        </td>
+      </tr>
+      <tr>
+        <td>Update username</td>
+        <td>/users/[Username]/[New username]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>
+          A text message indicating the name of the user and the successful
+          updating of the username.
+        </td>
+      </tr>
+      <tr>
+        <td>Update password</td>
+        <td>/users/passwords/[Password]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>
+          A text message indicating the username and the successful updating of
+          the password.
+        </td>
+      </tr>
+      <tr>
+        <td>Add a movie to favorites list</td>
+        <td>/users/favorites/[Username]/[movie title]</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>
+          A text message indicating [title of movie] has been added to
+          “Favorites.”
+        </td>
+      </tr>
+      <tr>
+        <td>Delete a movie from favorites list</td>
+        <td>/users/favorites/[Username]/[movie title]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message indicating [title of movie] has been deleted from
+          “Favorites.”
+        </td>
+      </tr>
+      <tr>
+        <td>Deregister</td>
+        <td>/users/[Username]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message that says, “[Username] was successfully deregistered.”
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
