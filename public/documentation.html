@@ -19,7 +19,29 @@
         <td>/movies</td>
         <td>GET</td>
         <td>None</td>
-        <td>A JSON object holding data about all movies</td>
+        <td>
+          A JSON object holding data about all movies. For example: <br />
+          [ { "Title": "Gladiator", "Description": "A former Roman General sets
+          out to exact vengeance against the corrupt emperor who murdered his
+          family and sent him into slavery.", "ImagePath": "gladiator.png",
+          "Featured": true "Genre": { "Name": "Drama", "Description": "Drama
+          films explore serious or emotional themes and presents them in a
+          realistic or artistic way. These themes can include personal
+          relationships, social issues, historical events, or psychological
+          struggles. Drama films often have complex characters and may focus on
+          the characters' internal conflicts or their interactions with others."
+          }, "Director": { "Name": "Ridley Scott", "Bio": "Ridley Scott is a
+          British film director and producer known for his work in the science
+          fiction, fantasy, and historical genres. Ridley Scott has directed and
+          produced numerous critically acclaimed and commercially successful
+          films. His films are known for their visually stunning imagery,
+          intricate production design, and immersive storytelling. Scott has
+          been nominated for multiple Academy Awards and has won numerous awards
+          for his contributions to the film industry.", "Birth": "1937-11-30",
+          "Death": null }, "Actors": [], "_id": "64334bfb33557a92f4b3375d",
+          },<br />
+          {Next}<br />]
+        </td>
       </tr>
       <tr>
         <td>Get data about a single movie by title</td>
@@ -38,19 +60,46 @@
       </tr>
       <tr>
         <td>Get list of movies in a genre</td>
-        <td>/movies/genres/[genre]</td>
+        <td>/movies/by_genres/[genre name]</td>
         <td>GET</td>
         <td>None</td>
         <td>
-          A JSON object holding data about a genre, containing the genre
-          description, and a list of all movies on platform in that genre.
-          Example: { Genre_name: “Thriller”, Thriller_description: “A thriller
-          movie is a genre of film that is designed to keep the audience on the
-          edge of their seats through suspenseful and tense situations. Thriller
-          movies often involve a plot that is centered around a crime, mystery,
-          or danger, with the main character or characters facing intense
-          physical or psychological challenges.”, Thriller_movies: “Butterfly
-          Effect”, “Get out”, “The Prestige”... }
+          A JSON object holding data about all movies in the specified genre.
+          For example for "Drama": [ { "Title": "Gladiator", "Description": "A
+          former Roman General sets out to exact vengeance against the corrupt
+          emperor who murdered his family and sent him into slavery.",
+          "ImagePath": "gladiator.png", "Featured": true "Genre": { "Name":
+          "Drama", "Description": "Drama films explore serious or emotional
+          themes and presents them in a realistic or artistic way. These themes
+          can include personal relationships, social issues, historical events,
+          or psychological struggles. Drama films often have complex characters
+          and may focus on the characters' internal conflicts or their
+          interactions with others." }, "Director": { "Name": "Ridley Scott",
+          "Bio": "Ridley Scott is a British film director and producer known for
+          his work in the science fiction, fantasy, and historical genres.
+          Ridley Scott has directed and produced numerous critically acclaimed
+          and commercially successful films. His films are known for their
+          visually stunning imagery, intricate production design, and immersive
+          storytelling. Scott has been nominated for multiple Academy Awards and
+          has won numerous awards for his contributions to the film industry.",
+          "Birth": "1937-11-30", "Death": null }, "Actors": [], "_id":
+          "64334bfb33557a92f4b3375d", }, <br />
+          {Next}<br />]
+        </td>
+      </tr>
+      <tr>
+        <td>Get data about a genre</td>
+        <td>/movies/genres/[genre name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a genre, containing the name and
+          description. Example: { "Name": "Drama", "Description": "Drama films
+          explore serious or emotional themes and presents them in a realistic
+          or artistic way. These themes can include personal relationships,
+          social issues, historical events, or psychological struggles. Drama
+          films often have complex characters and may focus on the characters'
+          internal conflicts or their interactions with others." }
         </td>
       </tr>
       <tr>
@@ -73,38 +122,65 @@
         </td>
       </tr>
       <tr>
+        <td>Get list of all movies from a specific director</td>
+        <td>/movies/by_directors/[director name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about all movies by a specific director.
+          For example for "Ridley Scott": [ { "Title": "Gladiator",
+          "Description": "A former Roman General sets out to exact vengeance
+          against the corrupt emperor who murdered his family and sent him into
+          slavery.", "ImagePath": "gladiator.png", "Featured": true "Genre": {
+          "Name": "Drama", "Description": "Drama films explore serious or
+          emotional themes and presents them in a realistic or artistic way.
+          These themes can include personal relationships, social issues,
+          historical events, or psychological struggles. Drama films often have
+          complex characters and may focus on the characters' internal conflicts
+          or their interactions with others." }, "Director": { "Name": "Ridley
+          Scott", "Bio": "Ridley Scott is a British film director and producer
+          known for his work in the science fiction, fantasy, and historical
+          genres. Ridley Scott has directed and produced numerous critically
+          acclaimed and commercially successful films. His films are known for
+          their visually stunning imagery, intricate production design, and
+          immersive storytelling. Scott has been nominated for multiple Academy
+          Awards and has won numerous awards for his contributions to the film
+          industry.", "Birth": "1937-11-30", "Death": null }, "Actors": [],
+          "_id": "64334bfb33557a92f4b3375d", }, <br />
+          {Next}<br />]
+        </td>
+      </tr>
+      <tr>
         <td>Add a user</td>
         <td>/users</td>
         <td>POST</td>
         <td>
           A JSON object holding data about the user to add, structured like: {
-          name: “Rachel Lawrie”, username:”r.lawrie”, password:
-          “13cat333plate&%” }
+          name: "Rachel Lawrie", username: "r.lawrie", password:
+          "13cat333plate&%" }
         </td>
         <td>
           A JSON object holding data about the user that was added. Example: {
-          id: 2380-293-2333, name: “Rachel Lawrie”, username:”r.lawrie”,
-          password: “13cat333plate&%” }
+          id: 2380-293-2333, name: "Rachel Lawrie", username: "r.lawrie",
+          password: "13cat333plate&%" }
         </td>
       </tr>
       <tr>
-        <td>Update username</td>
+        <td>Update user info</td>
         <td>/users/[Username]/[New username]</td>
         <td>PUT</td>
-        <td>None</td>
         <td>
-          A text message indicating the name of the user and the successful
-          updating of the username.
+          A JSON object holding the new desired data, structured like: { "_id":
+          "6435f516c61a278fb7810424", "Username": "ilovjohnnydepp", "Password":
+          "dog2vase!", "Email": "margo1@hotmail.com", "Birthday": "1985-02-19" }
         </td>
-      </tr>
-      <tr>
-        <td>Update password</td>
-        <td>/users/passwords/[Password]</td>
-        <td>PUT</td>
-        <td>None</td>
         <td>
-          A text message indicating the username and the successful updating of
-          the password.
+          A JSON object of the user with the updated data. Example: { "_id":
+          "6435f516c61a278fb7810424", "Username": "ilovjohnnydepp", "Password":
+          "dog2vase!", "Email": "margo1@hotmail.com", "Birthday":
+          "1985-02-19T00:00:00.000Z", "Favorites": [ [
+          "64334bfb33557a92f4b3375d", "64337de933557a92f4b33760" ] ],
+          "FavoriteMovies": [ "64337de933557a92f4b33760" ] }
         </td>
       </tr>
       <tr>
@@ -113,8 +189,13 @@
         <td>POST</td>
         <td>None</td>
         <td>
-          A text message indicating [title of movie] has been added to
-          “Favorites.”
+          A JSON object of the user with the specified movie added to favorites.
+          Example: { "_id": "6435f516c61a278fb7810424", "Username":
+          "ilovjohnnydepp", "Password": "dog2vase!", "Email":
+          "margo1@hotmail.com", "Birthday": "1985-02-19T00:00:00.000Z",
+          "Favorites": [ [ "64334bfb33557a92f4b3375d",
+          "64337de933557a92f4b33760" ] ], "FavoriteMovies": [
+          "64337de933557a92f4b33760" ] }
         </td>
       </tr>
       <tr>
@@ -123,8 +204,13 @@
         <td>DELETE</td>
         <td>None</td>
         <td>
-          A text message indicating [title of movie] has been deleted from
-          “Favorites.”
+          A JSON object of the user with the specified movie removed from
+          favorites. Example: { "_id": "6435f516c61a278fb7810424", "Username":
+          "ilovjohnnydepp", "Password": "dog2vase!", "Email":
+          "margo1@hotmail.com", "Birthday": "1985-02-19T00:00:00.000Z",
+          "Favorites": [ [ "64334bfb33557a92f4b3375d",
+          "64337de933557a92f4b33760" ] ], "FavoriteMovies": [
+          "64337de933557a92f4b33760" ] }
         </td>
       </tr>
       <tr>
