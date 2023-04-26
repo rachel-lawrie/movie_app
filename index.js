@@ -23,21 +23,29 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let auth = require("./auth")(app);
+const passport = require("passport");
+require("./passport");
+
 app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
 });
 
 // Return a list of ALL movies to the user
-app.get("/movies", (req, res) => {
-  Movies.find()
-    .then((movies) => {
-      res.status(201).json(movies);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error" + err);
-    });
-});
+app.get(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.find()
+      .then((movies) => {
+        res.status(201).json(movies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error" + err);
+      });
+  }
+);
 
 // Return data on a single movie by movie title
 app.get("/movies/titles/:Title", (req, res) => {
@@ -223,6 +231,18 @@ app.put("/users/:Username", (req, res) => {
     });
 });
 
+app.post("/users/usernames/:userName/:newUserName", (req, res) => {
+  res.send(
+    "A text message indicating the name of the user and the successful updating of the username."
+  );
+});
+
+app.put("/users/passwords/:newPassword", (req, res) => {
+  res.send(
+    "A text message indicating the username and the successful updating of the password."
+  );
+});
+
 // Add a movie to a user's list of favorites
 app.post("/users/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
@@ -230,7 +250,7 @@ app.post("/users/:Username/movies/:MovieID", (req, res) => {
       Username: req.params.Username,
     },
     {
-      $push: { Favorites: req.params.MovieID },
+      $push: { FavoriteMovies: req.params.MovieID },
     },
     { new: true }
   )
@@ -243,32 +263,17 @@ app.post("/users/:Username/movies/:MovieID", (req, res) => {
     });
 });
 
-// Remove a movie from a user's list of favorites
-app.delete("/users/:Username/movies/:MovieID", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $pull: { Favorites: req.params.MovieID },
-    },
-    { new: true }
-  )
-    .then((updatedUser) => {
-      res.json(updatedUser);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
+app.post("/users/favorites/:userName/:movieTitle", (req, res) => {
+  res.send(
+    "A text message indicating [title of movie] has been added to 'Favorites.'"
+  );
 });
 
-// // Remove favorites key
-// Users.updateMany({}, { $unset: { Favorites: 1 } })
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
+app.delete("/users/favorites/:userName/:movieTitle", (req, res) => {
+  res.send(
+    "A text message indicating [title of movie] has been deleted from 'Favorites.'"
+  );
+});
 
 // Delete a user by username
 app.delete("/users/:Username", (req, res) => {
