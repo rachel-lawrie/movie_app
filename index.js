@@ -66,7 +66,7 @@ app.get("/movies/titles/:Title", (req, res) => {
 });
 
 // Return all movies in a genre
-app.get("/movies/by_genres/:genre_name", (req, res) => {
+app.get("/genres/:genre_name/movies", (req, res) => {
   Movies.find({ "Genre.Name": req.params.genre_name })
     .then((genre) => {
       if (!genre) {
@@ -84,7 +84,7 @@ app.get("/movies/by_genres/:genre_name", (req, res) => {
 });
 
 // Return data about a genre
-app.get("/movies/genres/:genre_name", (req, res) => {
+app.get("/genres/:genre_name", (req, res) => {
   Movies.findOne({ "Genre.Name": req.params.genre_name })
     .then((genre) => {
       if (!genre) {
@@ -102,7 +102,7 @@ app.get("/movies/genres/:genre_name", (req, res) => {
 });
 
 // Return all movies with a specific director
-app.get("/movies/by_directors/:director_name", (req, res) => {
+app.get("/directors/:director_name/movies", (req, res) => {
   Movies.find({ "Director.Name": req.params.director_name })
     .then((director) => {
       if (!director) {
@@ -120,7 +120,7 @@ app.get("/movies/by_directors/:director_name", (req, res) => {
 });
 
 // Return data about a director
-app.get("/movies/directors/:director_name", (req, res) => {
+app.get("/directors/:director_name", (req, res) => {
   Movies.findOne({ "Director.Name": req.params.director_name })
     .then((director) => {
       if (!director) {
