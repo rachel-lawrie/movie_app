@@ -287,6 +287,15 @@ app.get(
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - now allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
   (req, res) => {
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
