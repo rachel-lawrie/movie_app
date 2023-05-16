@@ -98,6 +98,22 @@ app.get(
   }
 );
 
+// Edit data on a single movie
+app.put("/movies/titles/:Title", (req, res) => {
+  Movies.findOneAndUpdate(
+    { Title: req.params.Title },
+    { $set: { ImagePath: req.body.ImagePath } },
+    { new: true }
+  )
+    .then((updatedMovie) => {
+      res.json(updatedMovie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
 // Return all movies in a genre
 app.get(
   "/genres/:genre_name/movies",
