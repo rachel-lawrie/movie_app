@@ -337,26 +337,6 @@ app.put(
   }
 );
 
-app.post(
-  "/users/usernames/:userName/:newUserName",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send(
-      "A text message indicating the name of the user and the successful updating of the username."
-    );
-  }
-);
-
-app.put(
-  "/users/passwords/:newPassword",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send(
-      "A text message indicating the username and the successful updating of the password."
-    );
-  }
-);
-
 // Add a movie to a user's list of favorites
 app.post("/users/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
