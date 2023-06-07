@@ -341,13 +341,33 @@ app.put(
 );
 
 // Add a movie to a user's list of favorites
-app.put("/users/:Username/movies/", (req, res) => {
+app.post("/users/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     {
       Username: req.params.Username,
     },
     {
-      $set: { Favorites: req.body.Favorites },
+      $push: { Favorites: req.params.MovieID },
+    },
+    { new: true }
+  )
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+// Delete a movie from a user's list of favorites
+app.delete("/users/:Username/movies/:MovieID", (req, res) => {
+  Users.findOneAndUpdate(
+    {
+      Username: req.params.Username,
+    },
+    {
+      $pull: { Favorites: req.params.MovieID },
     },
     { new: true }
   )
