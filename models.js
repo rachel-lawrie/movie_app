@@ -26,10 +26,20 @@ let userSchema = mongoose.Schema({
   Favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
 });
 
+/**
+ * Hashes a password.
+ * @param {String} password - The password to hash.
+ * @returns {String} The hashed password.
+ */
 userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };
 
+/**
+ * Validates a user's password.
+ * @param {String} password - The password to validate.
+ * @returns {Boolean} True if the password is valid, false otherwise.
+ */
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.Password);
 };

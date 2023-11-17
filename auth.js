@@ -1,3 +1,8 @@
+/**
+ * Module for handling authentication processes including JWT token generation.
+ * @module authentication
+ */
+
 const jwtSecret = "your_jwt_secret"; // This has to be the same key used in the JWTStrategy
 
 const jwt = require("jsonwebtoken"),
@@ -5,6 +10,11 @@ const jwt = require("jsonwebtoken"),
 
 require("./passport"); // Your local passport file
 
+/**
+ * Generates a JWT token for a given user.
+ * @param {Object} user - The user object for which to generate the token.
+ * @returns {string} A JWT token.
+ */
 let generateJWTToken = (user) => {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username, // This is the username you’re encoding in the JWT
