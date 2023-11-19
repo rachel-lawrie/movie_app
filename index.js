@@ -38,6 +38,7 @@ let allowedOrigins = [
   "http://testsite.com",
   "http://localhost:1234",
   "https://myflix-rl-2023.netlify.app",
+  "https://rachel-lawrie.github.io",
 ];
 
 function checkOrigin(origin, callback) {
