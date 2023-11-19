@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "docs": "jsdoc -c jsdoc.json -v"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +25,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.36.0"
+    "eslint": "^8.36.0",
+    "jsdoc": "^4.0.2"
   },
   "description": ""
 }
