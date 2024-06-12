@@ -4,7 +4,7 @@ MyFlix API
 
 ## Description
 
-This heroku supported API enables the client to make requests and receive responses as part of an App that enables a user to create an account, login, view movies, create a list of favorites, edit their profile, log-out, and delete their account. See the "out" folder for more detailed technical documentation.
+This heroku supported API enables the client to make requests and receive responses as part of an App that enables a user to create an account, login, view movies, create a list of favorites, edit their profile, log-out, and delete their account. See the "public/documentation.html" file for API call details.
 
 ## Installation
 
